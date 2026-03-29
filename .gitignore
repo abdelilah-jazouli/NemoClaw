@@ -29,6 +29,10 @@ vdr-notes/
 *.pem
 *.pfx
 *.tfvars
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
 .direnv/
 .env
 .env.*
