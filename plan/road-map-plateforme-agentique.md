@@ -1,8 +1,23 @@
 # Roadmap — Plateforme Agentique pour TPE/PME
 
 > Date : 2026-04-03
+> Derniere mise a jour : 2026-04-03
 > Projet : Azeka Consulting — NemoClaw + OpenClaw + Paperclip
 > Fichier : `plan/road-map-plateforme-agentique.md`
+> Branche : `feature/equipe-prospection-openclaw-only`
+
+---
+
+## Progression globale
+
+| Phase | Description | Progression | Statut |
+|-------|-------------|-------------|--------|
+| Phase 1 | Equipe Prospection (OpenClaw natif) | 0/6 etapes | A demarrer |
+| Phase 2 | Ameliorations prospection | 0/7 items | En attente |
+| Phase 3 | Integration Paperclip (comparatif) | 0/10 etapes | En attente |
+| Phase 4 | Industrialisation (service web) | 0/7 items | En attente |
+
+**Legende statuts** : A demarrer | En cours | Bloque | Termine | En attente
 
 ---
 
@@ -75,6 +90,16 @@ Les declarations d'agents (IDs, outils, subagents) vivent dans `openclaw.json` s
 **Consequence** : il faut **reconstruire le sandbox** avec un Dockerfile modifie qui bake la config 5 agents.
 
 ### 1.4 Etapes de realisation
+
+| Etape | Description | Statut | Date |
+|-------|-------------|--------|------|
+| 0 | Backup du sandbox actuel | A faire | — |
+| 1 | Modifier le Dockerfile (config 5 agents) | A faire | — |
+| 2 | Creer les fichiers workspace des agents | A faire | — |
+| 3 | Reconstruire le sandbox | A faire | — |
+| 4 | Uploader les fichiers workspace et schemas | A faire | — |
+| 5 | Politique reseau pour le web | A faire | — |
+| 6 | Tests end-to-end | A faire | — |
 
 #### Etape 0 : Backup du sandbox actuel
 
@@ -254,15 +279,15 @@ openshell policy set web-access-policy.yaml my-mvp-compagny
 
 ## Phase 2 — Ameliorations du cas de prospection
 
-| # | Action | Priorite |
-|---|--------|----------|
-| 2.1 | Ajouter Brave Search API (gratuit 2000 req/mois) pour `web_search` reel | Haute |
-| 2.2 | Ajouter Firecrawl pour le scraping intelligent (LinkedIn, sites corporate) | Haute |
-| 2.3 | Activer la memoire (embeddings OpenAI) pour capitaliser inter-campagnes | Moyenne |
-| 2.4 | Ajouter le canal Telegram (piloter la campagne par bot) | Moyenne |
-| 2.5 | Ajouter les notifications WhatsApp (resume executif) | Basse |
-| 2.6 | Connecter un CRM PostgreSQL via MCP server | Basse |
-| 2.7 | Creer des skills metier (framework email AIDA, scoring B2B) | Moyenne |
+| # | Action | Priorite | Statut | Date |
+|---|--------|----------|--------|------|
+| 2.1 | Ajouter Brave Search API (gratuit 2000 req/mois) pour `web_search` reel | Haute | A faire | — |
+| 2.2 | Ajouter Firecrawl pour le scraping intelligent (LinkedIn, sites corporate) | Haute | A faire | — |
+| 2.3 | Activer la memoire (embeddings OpenAI) pour capitaliser inter-campagnes | Moyenne | A faire | — |
+| 2.4 | Ajouter le canal Telegram (piloter la campagne par bot) | Moyenne | A faire | — |
+| 2.5 | Ajouter les notifications WhatsApp (resume executif) | Basse | A faire | — |
+| 2.6 | Connecter un CRM PostgreSQL via MCP server | Basse | A faire | — |
+| 2.7 | Creer des skills metier (framework email AIDA, scoring B2B) | Moyenne | A faire | — |
 
 ---
 
@@ -322,18 +347,18 @@ Chaque agent Paperclip se connecte au **meme sandbox NemoClaw** via l'adaptateur
 
 ### 3.3 Etapes de realisation
 
-| # | Action | Detail |
-|---|--------|--------|
-| 3.3.1 | Redimensionner VM a e2-standard-8 (8 vCPU, 32 GB) + disque data 50 GB | Terraform |
-| 3.3.2 | Creer repo `nemoclaw-infra` (CI/CD, compose, workflows) | GitHub |
-| 3.3.3 | Build image Docker Paperclip → push GHCR | GitHub Actions |
-| 3.3.4 | `docker-compose.prod.yml` (Paperclip + PostgreSQL, volumes /data) | Deploiement |
-| 3.3.5 | Deployer Paperclip sur la VM | `docker compose up -d` |
-| 3.3.6 | Creer l'entreprise "Azeka Prospection" dans Paperclip | Dashboard UI |
-| 3.3.7 | Configurer les 5 agents avec l'adaptateur `openclaw-gateway` | Dashboard UI + token OpenClaw |
-| 3.3.8 | Creer le projet "Campagne Fintech DSI" + objectif + taches | Dashboard UI |
-| 3.3.9 | Lancer la campagne via Paperclip (heartbeat ou assignation manuelle) | Dashboard UI |
-| 3.3.10 | Comparer les resultats avec l'Approche A (Phase 1) | Rapport comparatif |
+| # | Action | Detail | Statut | Date |
+|---|--------|--------|--------|------|
+| 3.3.1 | Redimensionner VM a e2-standard-8 (8 vCPU, 32 GB) + disque data 50 GB | Terraform | A faire | — |
+| 3.3.2 | Creer repo `nemoclaw-infra` (CI/CD, compose, workflows) | GitHub | A faire | — |
+| 3.3.3 | Build image Docker Paperclip → push GHCR | GitHub Actions | A faire | — |
+| 3.3.4 | `docker-compose.prod.yml` (Paperclip + PostgreSQL, volumes /data) | Deploiement | A faire | — |
+| 3.3.5 | Deployer Paperclip sur la VM | `docker compose up -d` | A faire | — |
+| 3.3.6 | Creer l'entreprise "Azeka Prospection" dans Paperclip | Dashboard UI | A faire | — |
+| 3.3.7 | Configurer les 5 agents avec l'adaptateur `openclaw-gateway` | Dashboard UI + token OpenClaw | A faire | — |
+| 3.3.8 | Creer le projet "Campagne Fintech DSI" + objectif + taches | Dashboard UI | A faire | — |
+| 3.3.9 | Lancer la campagne via Paperclip (heartbeat ou assignation manuelle) | Dashboard UI | A faire | — |
+| 3.3.10 | Comparer les resultats avec l'Approche A (Phase 1) | Rapport comparatif | A faire | — |
 
 ### 3.4 Grille de comparaison (a remplir apres execution)
 
@@ -361,15 +386,15 @@ Le resultat du comparatif determinera l'approche retenue pour la Phase 4 (indust
 
 ## Phase 4 — Industrialisation (service web self-service)
 
-| # | Action | Detail |
-|---|--------|--------|
-| 4.1 | MVP service web (FastAPI/Next.js) pour provisionnement self-service | Frontend + Backend |
-| 4.2 | Integration Terraform Cloud API pour provisionnement GCP automatise | Infrastructure |
-| 4.3 | Integration Tailscale API pour enregistrement machine + ACLs | Reseau |
-| 4.4 | Gestion multi-tenant (1 VPC par client, isolation stricte) | Architecture |
-| 4.5 | Facturation et quotas (Stripe + suivi couts GCP par label) | Business |
-| 4.6 | Monitoring centralise (collecte → dashboard central) | Observabilite |
-| 4.7 | Template Packer (image VM pre-construite, startup en 1 min) | Performance |
+| # | Action | Detail | Statut | Date |
+|---|--------|--------|--------|------|
+| 4.1 | MVP service web (FastAPI/Next.js) pour provisionnement self-service | Frontend + Backend | A faire | — |
+| 4.2 | Integration Terraform Cloud API pour provisionnement GCP automatise | Infrastructure | A faire | — |
+| 4.3 | Integration Tailscale API pour enregistrement machine + ACLs | Reseau | A faire | — |
+| 4.4 | Gestion multi-tenant (1 VPC par client, isolation stricte) | Architecture | A faire | — |
+| 4.5 | Facturation et quotas (Stripe + suivi couts GCP par label) | Business | A faire | — |
+| 4.6 | Monitoring centralise (collecte → dashboard central) | Observabilite | A faire | — |
+| 4.7 | Template Packer (image VM pre-construite, startup en 1 min) | Performance | A faire | — |
 
 ---
 
@@ -392,3 +417,30 @@ Le resultat du comparatif determinera l'approche retenue pour la Phase 4 (indust
 | `/home/abdelilah/azeka-consulting/labs/NemoClaw/scripts/nemoclaw-start.sh` | Reference pour comprendre le boot du sandbox |
 | `/home/abdelilah/azeka-consulting/labs/openclaw/mydocs/etude-openclaw-orchestration.md` | Source des configs agents (sections 6.7-6.9) |
 | `/home/abdelilah/azeka-consulting/labs/NemoClaw/docs/guide-utilisateur-nemoclaw.md` | A mettre a jour apres chaque phase |
+
+---
+
+## Historique des mises a jour
+
+| Date | Phase | Action | Detail |
+|------|-------|--------|--------|
+| 2026-04-03 | — | Creation du plan | Roadmap 4 phases, architecture validee |
+| 2026-04-03 | — | Ajout indicateurs de suivi | Tableaux de progression par phase et etape |
+
+---
+
+## Travaux anterieurs realises (pre-roadmap)
+
+Ces travaux ont ete realises avant la formalisation de la roadmap et constituent le socle sur lequel les 4 phases s'appuient.
+
+| Date | Livrable | Statut |
+|------|----------|--------|
+| 2026-04-01 | `CLAUDE.md` — Guide pour Claude Code | Termine |
+| 2026-04-01 | `docs/guide-utilisateur-nemoclaw.md` — Guide FR (2065 lignes, 11 sections) | Termine |
+| 2026-04-01 | `terraform/gcp-personal/` — Profil personnel (e2-standard-4, valide en production) | Termine |
+| 2026-04-01 | `terraform/gcp-enterprise/` — Profil entreprise (a2-highgpu-1g, corrige avec REX) | Termine |
+| 2026-04-02 | VM GCP Paris deployee + NemoClaw installe + sandbox `my-mvp-compagny` actif | Termine |
+| 2026-04-02 | Agent DimaOne operationnel (Nemotron 3 Super 120B) | Termine |
+| 2026-04-02 | Etude OpenClaw orchestration (sections 6.7-6.9) | Termine |
+| 2026-04-03 | Etude Paperclip (architecture integration validee) | Termine |
+| 2026-04-03 | Commit `307f2ea` + `cb6f2f4` pousses sur `main` | Termine |
