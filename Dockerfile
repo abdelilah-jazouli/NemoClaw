@@ -52,6 +52,16 @@ RUN groupadd -r gateway && useradd -r -g gateway -d /sandbox -s /usr/sbin/nologi
 # state (agents, plugins, etc.) lives in .openclaw-data, reached via symlinks.
 # Ref: https://github.com/NVIDIA/NemoClaw/issues/514
 RUN mkdir -p /sandbox/.openclaw-data/agents/main/agent \
+        /sandbox/.openclaw-data/agents/prospection-manager/agent \
+        /sandbox/.openclaw-data/agents/prospection-manager/workspace \
+        /sandbox/.openclaw-data/agents/lead-researcher/agent \
+        /sandbox/.openclaw-data/agents/lead-researcher/workspace \
+        /sandbox/.openclaw-data/agents/market-analyst/agent \
+        /sandbox/.openclaw-data/agents/market-analyst/workspace \
+        /sandbox/.openclaw-data/agents/lead-qualifier/agent \
+        /sandbox/.openclaw-data/agents/lead-qualifier/workspace \
+        /sandbox/.openclaw-data/agents/copywriter/agent \
+        /sandbox/.openclaw-data/agents/copywriter/workspace \
         /sandbox/.openclaw-data/extensions \
         /sandbox/.openclaw-data/workspace \
         /sandbox/.openclaw-data/skills \
@@ -60,6 +70,11 @@ RUN mkdir -p /sandbox/.openclaw-data/agents/main/agent \
         /sandbox/.openclaw-data/devices \
         /sandbox/.openclaw-data/canvas \
         /sandbox/.openclaw-data/cron \
+        /sandbox/shared/schemas \
+        /sandbox/shared/exchange/leads \
+        /sandbox/shared/exchange/market-reports \
+        /sandbox/shared/exchange/qualified \
+        /sandbox/shared/exchange/campaigns \
     && mkdir -p /sandbox/.openclaw \
     && ln -s /sandbox/.openclaw-data/agents /sandbox/.openclaw/agents \
     && ln -s /sandbox/.openclaw-data/extensions /sandbox/.openclaw/extensions \
@@ -151,7 +166,58 @@ providers = { \
     } \
 }; \
 config = { \
-    'agents': {'defaults': {'model': {'primary': primary_model_ref}}}, \
+    'agents': { \
+        'defaults': { \
+            'model': {'primary': primary_model_ref}, \
+            'subagents': { \
+                'maxSpawnDepth': 1, \
+                'maxConcurrent': 8, \
+                'maxChildrenPerAgent': 10, \
+                'runTimeoutSeconds': 600 \
+            } \
+        }, \
+        'list': [ \
+            { \
+                'id': 'prospection-manager', \
+                'default': True, \
+                'identity': {'name': 'Prospection Manager', 'emoji': 'target'}, \
+                'subagents': { \
+                    'allowAgents': ['lead-researcher', 'market-analyst', 'lead-qualifier', 'copywriter'] \
+                }, \
+                'tools': { \
+                    'allow': ['group:sessions', 'group:fs', 'read', 'write'] \
+                } \
+            }, \
+            { \
+                'id': 'lead-researcher', \
+                'identity': {'name': 'Lead Researcher', 'emoji': 'magnifying_glass'}, \
+                'tools': { \
+                    'allow': ['group:web', 'group:fs', 'read', 'write'] \
+                } \
+            }, \
+            { \
+                'id': 'market-analyst', \
+                'identity': {'name': 'Market Analyst', 'emoji': 'chart_with_upwards_trend'}, \
+                'tools': { \
+                    'allow': ['group:web', 'group:fs', 'read', 'write'] \
+                } \
+            }, \
+            { \
+                'id': 'lead-qualifier', \
+                'identity': {'name': 'Lead Qualifier', 'emoji': 'star'}, \
+                'tools': { \
+                    'allow': ['group:web', 'group:fs', 'read', 'write'] \
+                } \
+            }, \
+            { \
+                'id': 'copywriter', \
+                'identity': {'name': 'Copywriter', 'emoji': 'writing_hand'}, \
+                'tools': { \
+                    'allow': ['group:web', 'group:fs', 'read', 'write'] \
+                } \
+            } \
+        ] \
+    }, \
     'models': {'mode': 'merge', 'providers': providers}, \
     'channels': {'defaults': {'configWrites': False}}, \
     'gateway': { \
